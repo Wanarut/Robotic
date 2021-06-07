@@ -1,0 +1,22 @@
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+sudo apt-get update
+sudo apt-get install ros-kinetic-desktop-full -y
+echo "source /opt/ros/kinetic/setup.zsh" >> ~/.zshrc
+source ~/.zshrc
+sudo apt install python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential -y
+sudo apt install python-rosdep -y
+sudo rosdep init
+rosdep update
+
+sudo apt install ros-kinetic-rospy-tutorials -y
+sudo apt install ros-kinetic-rosbridge-server -y
+
+# Master
+export ROS_HOSTNAME=192.168.1.108
+export ROS_MASTER_URI=http://192.168.1.108:11311
+rosrun rospy_tutorials listener.py
+# Slave
+export ROS_HOSTNAME=192.168.1.111
+export ROS_MASTER_URI=http://192.168.1.108:11311
+rosrun rospy_tutorials talker.py

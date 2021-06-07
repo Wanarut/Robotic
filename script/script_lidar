@@ -1,0 +1,17 @@
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src
+git clone https://github.com/RoboSense-LiDAR/ros_rslidar
+sudo apt-get install libpcap-dev -y
+
+cd ~/catkin_ws/src/ros_rslidar/rslidar_driver
+chmod 777 cfg/*
+
+cd ~/catkin_ws/src/ros_rslidar/rslidar_pointcloud
+chmod 777 cfg/*
+
+cd ~/catkin_ws
+catkin_make
+
+cd ~/catkin_ws
+source devel/setup.zsh
+roslaunch rslidar_pointcloud rs_lidar_16.launch
